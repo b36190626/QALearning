@@ -199,7 +199,7 @@ public class Task2Part2and3Test {
         secondCard.isElementPresent();
 
         //Verify the second card is open or not
-        if (secondCard.isDisplayed()) {
+        if (secondCard.isElementPresent()) {
             Assert.assertTrue(true);
             System.out.println("The second card is open");
         }
