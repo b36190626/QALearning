@@ -12,11 +12,10 @@ public class Task2Part1Case2Test {
 
     @BeforeClass
     public void preCondition() throws IOException, ParseException {
+
         // Reading host URL from the config file using SettingsReader class
         SettingsReader settingsReader = new SettingsReader();
         settingsReader.readFile(CONFIG_FILE_PATH);
-        //String type = settingsReader.getValue("DriverType");
-        //browserCap = BrowserFactory.getBrowser(type); // can also be fetchable from config.json
         browserCap = BrowserFactory.getBrowser(DriverType.FIREFOX);
         Browser.goToUrl(settingsReader.getValue("hostURL"));
 
@@ -24,38 +23,39 @@ public class Task2Part1Case2Test {
 
     @Test
     public void userInyerface() {
+
         // Step 1: Navigate to main page by URL
-
-        // Waiting for the page to contains start view div
-        //WebDriverWait waits = WaitUtil.getWaits();
-
         BaseElement homePage = new BaseElement(By.xpath("//div[contains(@class, 'start')]"), "Home Page");
         homePage.isElementPresent();
-
-        //new WebDriverWait(Browser.driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(homePage.getElement()));
 
         // Verifying the expected result "Main Page is Open." for step 1
         if (homePage.isDisplayed()) {
             Assert.assertTrue(true);
-            //Assert.assertTrue(homePage.isDisplayed());
             System.out.println("Main Page is open");
         } else {
             System.out.println("Main page is not as expected");
         }
+
         // Step 2: Click HERE button
         BaseElement hereLink = new Button(By.xpath("//a[contains(@class, 'start__link')]"), "Here Link");
         hereLink.click();
+
+        // Game Page
         BaseElement gameView = new BaseElement(By.xpath("//div[contains(@class, 'game')]"), "Game View");
         gameView.isElementPresent();
+
+        // Verify
         if (gameView.isDisplayed()) {
             Assert.assertTrue(true);
-            //Assert.assertTrue(homePage.isDisplayed());
             System.out.println("Game Page is open");
         } else {
             System.out.println("Game page is not as expected");
         }
+
         //Step 2 checking if the timer starts from zero or not
         BaseElement timerElement = new BaseElement(By.xpath("//div[contains(@class, 'timer')]"), "Timer");
+
+        //Verify
         if (timerElement.isDisplayed() && timerElement.getElement().getText().equals("00:00:00")) {
             System.out.println("The timer starts from zero");
             Assert.assertTrue(true);

@@ -10,7 +10,6 @@ public class Browser {
 
     public static void goToUrl(String url) {
         driver.get(url);
-        System.out.println(url);
     }
 
     public void closeBrowser() {
